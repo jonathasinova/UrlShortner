@@ -48,8 +48,8 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center p-4">
-      <div className="max-w-md w-full">
+    <main className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-orange-400 to-red-600">
+      <div className="text-center max-w-md w-full px-4">
         <h1 className="text-4xl font-bold text-white text-center mb-8">
           Encurtador de URLs
         </h1>
@@ -60,14 +60,14 @@ export default function Home() {
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             placeholder="Cole sua URL aqui"
-            className="w-full px-4 py-3 rounded-lg shadow-lg focus:ring-2 focus:ring-purple-300 outline-none"
+            className="w-full px-4 py-3 rounded-lg shadow-lg focus:ring-2 focus:ring-orange-300 outline-none"
             required
             disabled={isLoading}
           />
           
           <button
             type="submit"
-            className="w-full bg-white text-purple-600 font-semibold py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50"
+            className="w-full bg-white text-orange-600 font-semibold py-3 rounded-lg shadow-lg hover:bg-orange-50 hover:shadow-xl transition-all duration-300 disabled:opacity-50"
             disabled={isLoading}
           >
             {isLoading ? 'Encurtando...' : 'Encurtar URL'}
@@ -88,13 +88,13 @@ export default function Home() {
                 href={shortUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-purple-600 hover:text-purple-700 break-all flex-1"
+                className="text-orange-600 hover:text-orange-700 break-all flex-1"
               >
                 {shortUrl}
               </a>
               <button
                 onClick={copyToClipboard}
-                className="px-3 py-1 bg-purple-100 text-purple-600 rounded hover:bg-purple-200"
+                className="px-3 py-1 bg-orange-100 text-orange-600 rounded hover:bg-orange-200"
               >
                 Copiar
               </button>
