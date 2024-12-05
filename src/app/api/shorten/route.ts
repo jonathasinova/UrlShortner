@@ -4,8 +4,13 @@ import { connectDB } from '@/lib/mongodb'
 
 export async function POST(req: Request) {
   try {
-    console.log(req);
-    const { url: longUrl } = await req.json()
+    console.log('Request headers:', Object.fromEntries(req.headers))
+    console.log('Request method:', req.method)
+    
+    const body = await req.json()
+    console.log('Request body:', body)
+    
+    const { url: longUrl } = body
 
     if (!longUrl) {
       return NextResponse.json(
@@ -56,9 +61,14 @@ export async function POST(req: Request) {
 
     return NextResponse.json(newUrl, { status: 201 })
   } catch (error) {
-    console.error('Erro:', error)
+    console.error('Erro detalhado:', {
+      message: error.message,
+      stack: error.stack,
+      name: error.name
+    })
+    
     return NextResponse.json(
-      { error: 'Erro interno' },
+      { error: 'Erro interno', details: error.message },
       { status: 500 }
     )
   }

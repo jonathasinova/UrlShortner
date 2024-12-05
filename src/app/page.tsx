@@ -15,6 +15,8 @@ export default function Home() {
     setShortUrl('')
 
     try {
+      console.log('Chamando API:', '/api/shorten')
+      
       const response = await fetch('/api/shorten', {
         method: 'POST',
         headers: {
@@ -23,7 +25,9 @@ export default function Home() {
         body: JSON.stringify({ url }),
       })
 
+      console.log('Status da resposta:', response.status)
       const data = await response.json()
+      console.log('Dados da resposta:', data)
 
       if (!response.ok) {
         throw new Error(data.error || 'Erro ao encurtar URL')
@@ -32,6 +36,7 @@ export default function Home() {
       setShortUrl(data.shortUrl)
       setUrl('')
     } catch (error) {
+      console.error('Erro completo:', error)
       setError(error instanceof Error ? error.message : 'Erro ao encurtar URL')
     } finally {
       setIsLoading(false)
