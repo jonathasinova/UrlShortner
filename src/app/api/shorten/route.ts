@@ -4,6 +4,7 @@ import { connectDB } from '@/lib/mongodb'
 
 export async function POST(req: Request) {
   try {
+    console.log(req);
     const { url: longUrl } = await req.json()
 
     if (!longUrl) {
@@ -13,9 +14,7 @@ export async function POST(req: Request) {
       )
     }
 
-    const formattedUrl = longUrl.startsWith('http') 
-      ? longUrl 
-      : `https://${longUrl}`
+    const formattedUrl = longUrl;
 
     try {
       new URL(formattedUrl)
