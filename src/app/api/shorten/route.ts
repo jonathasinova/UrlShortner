@@ -60,15 +60,15 @@ export async function POST(req: Request) {
     console.log('URL criada:', newUrl)
 
     return NextResponse.json(newUrl, { status: 201 })
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Erro detalhado:', {
-      message: error.message,
-      stack: error.stack,
-      name: error.name
+      message: error instanceof Error ? error.message : 'Erro desconhecido',
+      stack: error instanceof Error ? error.stack : undefined,
+      name: error instanceof Error ? error.name : undefined
     })
     
     return NextResponse.json(
-      { error: 'Erro interno', details: error.message },
+      { error: 'Erro interno', details: error instanceof Error ? error.message : 'Erro desconhecido' },
       { status: 500 }
     )
   }
