@@ -12,7 +12,7 @@ export async function GET(
   try {
     console.log('Tentando encontrar URL para código:', params.shortId)
     const db = await connectDB()
-    const collection = db.collection('urls')
+    const collection = db.collection('Url')
 
     const url = await collection.findOneAndUpdate(
       { urlCode: params.shortId.trim() },
@@ -29,15 +29,12 @@ export async function GET(
 
     let destinationUrl = url.value.longUrl
     
-    // Verifica e corrige a URL de destino
-    try {
-      new URL(destinationUrl) // Testa se é uma URL válida
-    } catch {
-      // Se não for uma URL válida, adiciona https://
+    if (!destinationUrl.startsWith('http://') && !destinationUrl.startsWith('https://')) {
       destinationUrl = `https://${destinationUrl}`
     }
 
-    return NextResponse.redirect(destinationUrl, { status: 301 })
+    console.log('Redirecionando para:', destinationUrl)
+    return NextResponse.redirect(destinationUrl)
   } catch (error) {
     console.error('Erro ao redirecionar:', error)
     return NextResponse.redirect(new URL('/', request.url))

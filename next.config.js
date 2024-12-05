@@ -1,13 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  async rewrites() {
-    return [
-      {
-        source: '/r/:shortId',
-        destination: '/api/redirect/:shortId',
-      },
-    ]
-  },
+  async redirects() {
+    return []
+  }
 }
 
-module.exports = nextConfig 
+module.exports = nextConfig
