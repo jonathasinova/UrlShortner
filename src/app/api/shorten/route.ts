@@ -36,6 +36,13 @@ export async function POST(req: Request) {
     const urlCode = nanoid(6)
     const shortUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/r/${urlCode}`
 
+    console.log('Criando URL curta:', {
+      urlCode,
+      shortUrl,
+      longUrl: formattedUrl,
+      baseUrl: process.env.NEXT_PUBLIC_BASE_URL
+    })
+
     const newUrl = {
       longUrl: formattedUrl,
       shortUrl,
